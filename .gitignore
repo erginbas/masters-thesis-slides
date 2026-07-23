@@ -12,8 +12,5 @@
 *.bbl
 *.blg
 
-# Built figure PDFs (regenerate with `make`)
-figures/fig_*.pdf
-
 # macOS
 .DS_Store
