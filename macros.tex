@@ -1,0 +1,153 @@
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\DeclareMathOperator*{\Var}{Var}
+\DeclareMathOperator*{\median}{median}
+\DeclareMathOperator*{\mean}{mean}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\esssup}{ess\,sup}
+\DeclareMathOperator{\fastmobius}{FastMobius}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\dec}{Dec}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\linspan}{span}
+\DeclareMathOperator{\proj}{Proj}
+\DeclareMathOperator{\sv}{SV}
+\DeclareMathOperator{\err}{err}
+\DeclareMathOperator{\obj}{obj}
+\DeclareMathOperator{\bern}{Bern}
+\DeclareMathOperator{\binomdist}{Binom}
+\DeclareMathOperator\erf{erf}
+
+\newcommand{\type}[1]{\mathrm{Type} \left( #1 \right)}
+\newcommand{\detect}[1]{\mathrm{Detect} \left( #1 \right)}
+
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+\definecolor{lightpink}{rgb}{1,0.9,0.9}
+\definecolor{figblue}{RGB}{0,100,200}
+\definecolor{figred}{RGB}{200,50,50}
+\definecolor{figgreen}{RGB}{0,140,60}
+\definecolor{figpurple}{RGB}{150,50,150}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\eqdef}{=\vcentcolon}
+
+\newcommand{\dt}{\text{ d}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cI}{\mathcal I}
+\newcommand{\cJ}{\mathcal J}
+\newcommand{\cK}{\mathcal K}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cM}{\mathcal M}
+\newcommand{\cN}{\mathcal N}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cQ}{\mathcal Q}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cU}{\mathcal U}
+\newcommand{\cV}{\mathcal V}
+\newcommand{\cW}{\mathcal W}
+\newcommand{\cX}{\mathcal X}
+\newcommand{\cY}{\mathcal Y}
+\newcommand{\cZ}{\mathcal Z}
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrC}{\mathscr C}
+\newcommand{\scrD}{\mathscr D}
+\newcommand{\scrE}{\mathscr E}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrG}{\mathscr G}
+\newcommand{\scrH}{\mathscr H}
+\newcommand{\scrI}{\mathscr I}
+\newcommand{\scrJ}{\mathscr J}
+\newcommand{\scrK}{\mathscr K}
+\newcommand{\scrL}{\mathscr L}
+\newcommand{\scrM}{\mathscr M}
+\newcommand{\scrN}{\mathscr N}
+\newcommand{\scrO}{\mathscr O}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrQ}{\mathscr Q}
+\newcommand{\scrR}{\mathscr R}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\scrT}{\mathscr T}
+\newcommand{\scrU}{\mathscr U}
+\newcommand{\scrV}{\mathscr V}
+\newcommand{\scrW}{\mathscr W}
+\newcommand{\scrX}{\mathscr X}
+\newcommand{\scrY}{\mathscr Y}
+\newcommand{\scrZ}{\mathscr Z}
+\newcommand{\bbB}{\mathbb B}
+\newcommand{\bbS}{\mathbb S}
+\newcommand{\bbR}{\mathbb R}
+\newcommand{\bbZ}{\mathbb Z}
+\newcommand{\bbI}{\mathbb I}
+\newcommand{\bbQ}{\mathbb Q}
+\newcommand{\bbP}{\mathbb P}
+\newcommand{\bbE}{\mathbb E}
+\newcommand{\bbN}{\mathbb N}
+\newcommand{\sfE}{\mathsf E}
+\newcommand{\sfF}{\mathsf F}
+\newcommand{\sfV}{\mathsf V}
+\newcommand{\one}{\mathds 1}
+\newcommand{\AND}{$\mathsf{AND}$\xspace}
+\newcommand{\OR}{$\mathsf{OR}$\xspace}
+
+\newcommand{\Tr}{ \text{Tr} }
+\newcommand{\trans}{\textrm{T}}
+
+\newcommand{\by}{\mathbf y}
+\newcommand{\bxi}{\boldsymbol \xi}
+\newcommand{\bx}{\mathbf x}
+\newcommand{\bd}{\mathbf d}
+\newcommand{\barbd}{\mathbf{ \overline{ d}}}
+\newcommand{\barbh}{\mathbf{ \overline{ h}}}
+\newcommand{\barbell}{\overline{ \mathbf{ \ell}}}
+\newcommand{\bc}{\mathbf c}
+\newcommand{\be}{\mathbf e}
+\newcommand{\bg}{\mathbf g}
+\newcommand{\bw}{\mathbf w}
+\newcommand{\bW}{\mathbf W}
+\newcommand{\bv}{\mathbf v}
+\newcommand{\bj}{\mathbf j}
+\newcommand{\bu}{\mathbf u}
+\newcommand{\ba}{\mathbf a}
+\newcommand{\bb}{\mathbf b}
+\newcommand{\bk}{\mathbf k}
+\newcommand{\boldm}{\mathbf m}
+\newcommand{\br}{\mathbf r}
+\newcommand{\bA}{\mathbf A}
+\newcommand{\bM}{\mathbf M}
+\newcommand{\bX}{\mathbf X}
+\newcommand{\bY}{\mathbf Y}
+\newcommand{\bD}{\mathbf D}
+\newcommand{\bI}{\mathbf I}
+\newcommand{\bH}{\mathbf H}
+\newcommand{\bh}{\mathbf h}
+\newcommand{\bs}{\mathbf s}
+\newcommand{\bz}{\mathbf z}
+\newcommand{\bS}{\mathbf S}
+\newcommand{\bZ}{\mathbf Z}
+\newcommand{\bU}{\mathbf U}
+\newcommand{\bL}{\mathbf L}
+\newcommand{\PASMT}{PASMT\xspace}
+\newcommand{\FASMT}{FASMT\xspace}
+\newcommand{\GBSA}{\text{GBSA}\xspace}
+\newcommand{\bbeta}{\bm \beta}
+\newcommand{\balpha}{\bm \alpha}
+\newcommand{\bell}{\boldsymbol{\ell}}
+\newcommand{\bZero}{\boldsymbol 0}
+\newcommand{\bOne}{\boldsymbol 1}
+\newcommand{\beps}{\boldsymbol{\epsilon}}
+\newcommand{\indep}{\perp \!\!\! \perp}
+

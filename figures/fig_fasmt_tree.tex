@@ -1,0 +1,95 @@
+\documentclass[tikz,border=10pt,multi=forest]{standalone}
+
+% Staged version of the FASMT bin-splitting tree for progressive reveal.
+% Produces one page per stage (7 pages total), following the depth-first
+% (lexicographic) processing order.
+% Running example (n = 4): F(0100)=2, F(0001)=3, F(0101)=1.
+% Adaptive test vectors: h_eps = 1011, h_0 = 0100, h_1 = 1010, h_10 = 0100.
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit,backgrounds}
+\usepackage{amsmath,amssymb}
+\usepackage{forest}
+\usepackage{xcolor}
+
+\newcommand{\bh}{\mathbf{h}}
+\newcommand{\bk}{\mathbf{k}}
+\newcommand{\bell}{\boldsymbol{\ell}}
+\newcommand{\beps}{\boldsymbol{\epsilon}}
+
+\definecolor{hepscolor}{RGB}{0,100,200}
+\definecolor{h0color}{RGB}{200,50,50}
+\definecolor{h1color}{RGB}{0,140,60}
+\definecolor{h10color}{RGB}{150,50,150}
+\definecolor{ordercolor}{RGB}{180,100,30}
+
+\newlength{\CircleSize}
+\setlength{\CircleSize}{52pt}
+
+% Stage machinery: elements tagged app=<k> become invisible while \stage < k.
+\tikzset{
+  app/.code={\ifnum\stage<#1\relax
+    \pgfkeysalso{/tikz/opacity=0,/tikz/text opacity=0}\fi},
+  binlabel/.style={font=\large\bfseries, fill=yellow!30, rounded corners=2pt, inner sep=3pt, xshift=-8pt, yshift=-4pt},
+  binlabelpruned/.style={font=\large\bfseries, fill=black!8, text=black!50, rounded corners=2pt, inner sep=3pt, xshift=-8pt, yshift=-4pt},
+  peelbox/.style={font=\large, draw=orange!70!black, rounded corners=4pt, fill=orange!20, inner sep=6pt, minimum width=70pt, minimum height=50pt, line width=1pt},
+  peelconnector/.style={very thick, densely dotted, orange!70!black, -Latex},
+  orderlabel/.style={font=\normalsize\bfseries, text=ordercolor, circle, draw=ordercolor, fill=ordercolor!10, inner sep=2pt, minimum size=20pt, line width=0.8pt, xshift=3pt, yshift=-4pt},
+}
+
+\newcommand{\slidetree}{%
+\begin{forest}
+for tree={
+  font=\Large,
+  draw,
+  very thick,
+  circle,
+  align=center,
+  inner sep=3pt,
+  minimum size=\CircleSize,
+  edge={-Latex, very thick},
+  l sep=20mm,
+  s sep=12mm,
+  anchor=center,
+  child anchor=north,
+},
+prunednode/.style={
+  draw=black!35,
+  dashed,
+  circle,
+  align=center,
+  text=black!35,
+  inner sep=3pt,
+  minimum size=\CircleSize,
+  anchor=center,
+  line width=1pt,
+},
+edgeeps/.style={edge={-Latex, very thick, hepscolor}},
+edge0/.style={edge={-Latex, very thick, h0color}},
+edge1/.style={edge={-Latex, very thick, h1color}},
+edge10/.style={edge={-Latex, very thick, h10color}},
+%
+[{\(\mathcal{B}(\beps)\)}, name=root, draw=hepscolor, label={[binlabel,app=1]north east:\(V=6\)}, label={[orderlabel,app=1]north west:1}
+  [{\(\mathcal{B}(0)\)}, app=2, name=node0, draw=h0color, edgeeps, edge+={app=2}, label={[binlabel,app=2]north east:\(V=2\)}, label={[orderlabel,app=2]north west:2}, edge label={node[pos=0.3,anchor=east,font=\Large,xshift=-3pt,text=hepscolor,app=2]{\(\bh_{\beps}^{\top}\bk=0\)}}
+    [{\(\mathcal{B}(00)\)}, app=3, prunednode, edge0, edge+={app=3}, label={[binlabelpruned,app=3]north east:\(V=0\)}, label={[orderlabel,app=3]north west:3}, edge label={node[pos=0.3,anchor=east,font=\Large,xshift=-3pt,text=h0color,app=3]{\(\bh_{0}^{\top}\bk=0\)}}]
+    [{\(\mathcal{B}(01)\)}, app=3, name=node01, edge0, edge+={app=3}, label={[binlabel,app=3]north east:\(V=2\)}, label={[orderlabel,app=3]north west:4}, edge label={node[pos=0.3,anchor=west,font=\Large,xshift=3pt,text=h0color,app=3]{\(\bh_{0}^{\top}\bk=1\)}}, tikz+={\node[peelbox,align=center,anchor=north,app=4] (peel01) at ([xshift=-50pt,yshift=-20pt]node01.south) {\textsc{GBSA}\\\(\bk=0100\)\\\(F(0100) \gets 2\)}; \draw[peelconnector,app=4] (node01.-150) to[out=-150, in=90] ($(peel01.north)!0.5!(peel01.north west)$);}]
+  ]
+  [{\(\mathcal{B}(1)\)}, app=2, name=node1, draw=h1color, edgeeps, edge+={app=2}, label={[binlabel,app=2]north east:\(V=4\)}, label={[orderlabel,app=2]north west:5}, edge label={node[pos=0.3,anchor=west,font=\Large,xshift=3pt,text=hepscolor,app=2]{\(\bh_{\beps}^{\top}\bk=1\)}}
+    [{\(\mathcal{B}(10)\)}, app=5, name=node10, draw=h10color, edge1, edge+={app=5}, label={[binlabel,app=5]north east:\(V=4\)}, label={[orderlabel,app=5]north west:6}, edge label={node[pos=0.3,anchor=east,font=\Large,xshift=-3pt,text=h1color,app=5]{\(\bh_{1}^{\top}\bk=0\)}}
+      [{\(\mathcal{B}(100)\)}, app=6, name=node100, edge10, edge+={app=6}, label={[binlabel,app=6]north east:\(V=3\)}, label={[orderlabel,app=6]north west:7}, edge label={node[pos=0.3,anchor=east,font=\Large,xshift=-3pt,text=h10color,app=6]{\(\bh_{10}^{\top}\bk=0\)}}, tikz+={\node[peelbox,align=center,anchor=north,app=7] (peel100) at ([yshift=-20pt]node100.south) {\textsc{GBSA}\\\(\bk=0001\)\\\(F(0001) \gets 3\)}; \draw[peelconnector,app=7] (node100.-150) to[out=-150, in=90] ($(peel100.north)!0.5!(peel100.north west)$);}]
+      [{\(\mathcal{B}(101)\)}, app=6, name=node101, edge10, edge+={app=6}, label={[binlabel,app=6]north east:\(V=1\)}, label={[orderlabel,app=6]north west:8}, edge label={node[pos=0.3,anchor=west,font=\Large,xshift=3pt,text=h10color,app=6]{\(\bh_{10}^{\top}\bk=1\)}}, tikz+={\node[peelbox,align=center,anchor=north,app=7] (peel101) at ([yshift=-20pt]node101.south) {\textsc{GBSA}\\\(\bk=0101\)\\\(F(0101) \gets 1\)}; \draw[peelconnector,app=7] (node101.-150) to[out=-150, in=90] ($(peel101.north)!0.5!(peel101.north west)$);}]
+    ]
+    [{\(\mathcal{B}(11)\)}, app=5, prunednode, edge1, edge+={app=5}, label={[binlabelpruned,app=5]north east:\(V=0\)}, label={[orderlabel,app=5]north west:9}, edge label={node[pos=0.3,anchor=west,font=\Large,xshift=3pt,text=h1color,app=5]{\(\bh_{1}^{\top}\bk=1\)}}]
+  ]
+]
+\end{forest}}
+
+\begin{document}
+\def\stage{1}\slidetree
+\def\stage{2}\slidetree
+\def\stage{3}\slidetree
+\def\stage{4}\slidetree
+\def\stage{5}\slidetree
+\def\stage{6}\slidetree
+\def\stage{7}\slidetree
+\end{document}

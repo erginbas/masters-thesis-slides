@@ -1,0 +1,20 @@
+# LaTeX intermediates
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.vrb
+*.bbl
+*.blg
+
+# Built PDFs (regenerate with `make`)
+main.pdf
+figures/fig_*.pdf
+
+# macOS
+.DS_Store
